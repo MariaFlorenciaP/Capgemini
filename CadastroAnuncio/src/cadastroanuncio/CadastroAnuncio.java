@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class CadastroAnuncio {
 
@@ -16,17 +17,8 @@ public class CadastroAnuncio {
 
         List<Anuncio> lista = new ArrayList<>();
 
-        System.out.println("****** Bemvindo ******");
-        System.out.println("Digite 1 para cadastrar um anuncio");
-        System.out.println("Digite 2 para gerar relatório do valor total investido");
-        System.out.println("Digite 3 para gerar relatório da quantidade máxima de visualizações");
-        System.out.println("Digite 3 para gerar relatório da quantidade máxima de cliques");
-        System.out.println("Digite 4 para gerar relatório da quantidade máxima de compartilhamentos");
-        System.out.println("Digite 5 para sair");
-        int resp = entrada.nextInt();
-
-        switch (resp) {
-            case 1:
+        System.out.println("****** Bemvindo a sistema de cadastro de anúncios ******");
+      
                 Anuncio anuncio1 = new Anuncio();
                 System.out.println("Informe o nome do anúncio: ");
                 String nomeAnuncio = entrada.next();
@@ -49,17 +41,21 @@ public class CadastroAnuncio {
                 System.out.println("Informe o valor do investimento diário: ");
                 Double investimento = entrada.nextDouble();
                 anuncio1.setInvestimento(investimento);
+      
 
                 mostrarAnuncio(anuncio1);
+                
+                Double totalInvestido = calcularValorInvestido(dataInicio, dataTermino, investimento);
+                System.out.println("Valor total investido: " + totalInvestido);
+                
+                
+                System.out.println("Visualizações: ");
+                calcularVisualizacoes(investimento);
+  
 
-                break;
-
-        }
-
-        //*case 2:
-        // break;
-        //default:
     }
+
+   
 
     public static void mostrarAnuncio(Anuncio a) {
         System.out.println("Anuncio Cadastrado: ");
@@ -73,4 +69,29 @@ public class CadastroAnuncio {
         System.out.println("-------------------------------------");
     }
 
+    public static double calcularValorInvestido(Date dataInicio, Date dataTermino, Double investimento) {
+       
+		long dif = Math.abs(dataTermino.getTime() - dataInicio.getTime()); 
+		long dias = TimeUnit.DAYS.convert(dif, TimeUnit.MILLISECONDS); 
+		return investimento * dias;
+	
+    }
+    
+    public static void calcularVisualizacoes(Double investimento){
+        Double visualizaOriginal = investimento * 30;
+        Double contadorVisualizacoes = visualizaOriginal;
+        for (int i = 0; i <= 3; i++) {
+            Double pessoasClicam = visualizaOriginal * 0.12;
+            Double pessoasCompartilham = pessoasClicam * 0.15;
+            Double visualizacoesCompartilhadas = pessoasCompartilham * 40;
+            contadorVisualizacoes += visualizacoesCompartilhadas;
+            
+        }
+        int totalViews = (int) Math.round(contadorVisualizacoes);
+        System.out.println("A quantidade de pessoas que visualizaram o anúncio é: " + totalViews);
+        
+    }
+    
+    
+    
 }

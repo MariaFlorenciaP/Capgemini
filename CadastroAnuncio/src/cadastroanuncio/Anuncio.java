@@ -1,11 +1,9 @@
-
 package cadastroanuncio;
 
 import java.util.Date;
 
-
 public class Anuncio {
-    
+
     private String nomeAnuncio;
     private String cliente;
     private Date dataInicio;
@@ -15,13 +13,13 @@ public class Anuncio {
     public Anuncio(String nomeAnuncio, String cliente, Date dataInicio, Date dataTermino, Double investimento) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    public Anuncio (){
-       this.nomeAnuncio = null;
-       this.cliente = null;
-       this.dataInicio = null;
-       this.dataTermino = null;
-       this.investimento = 0.0;
+
+    public Anuncio() {
+        this.nomeAnuncio = null;
+        this.cliente = null;
+        this.dataInicio = null;
+        this.dataTermino = null;
+        this.investimento = 0.0;
     }
 
     public String getNomeAnuncio() {
@@ -63,7 +61,12 @@ public class Anuncio {
     public void setInvestimento(Double investimento) {
         this.investimento = investimento;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Anúncio {Nome do anúncio: " + nomeAnuncio + ", Cliente: " + cliente + ", data inicial: " + dataInicio + ", data final: "
+                + dataTermino + ", Investimento diário: " + investimento + "}";
+
+    }
 
 }
