@@ -48,7 +48,7 @@ public class CadastroAnuncio {
         System.out.println("Valor total investido: " + totalInvestido);
 
         System.out.println("Visualizações: ");
-        calcularVisualizacoes(investimento);
+        calculadora(investimento);
 
     }
 
@@ -72,18 +72,26 @@ public class CadastroAnuncio {
 
     }
 
-    public static void calcularVisualizacoes(Double investimento) {
+    public static void calculadora(Double investimento) {
         Double visualizaOriginal = investimento * 30;
-        Double contadorVisualizacoes = visualizaOriginal;
+        Double contadorViews = visualizaOriginal;
+        Double contadorCliques = 0.0;
+        Double contadorCompartilhamentos = 0.0;
         for (int i = 0; i <= 3; i++) {
             Double pessoasClicam = visualizaOriginal * 0.12;
             Double pessoasCompartilham = pessoasClicam * 0.15;
             Double visualizacoesCompartilhadas = pessoasCompartilham * 40;
-            contadorVisualizacoes += visualizacoesCompartilhadas;
+            contadorViews += visualizacoesCompartilhadas;
+            contadorCliques += pessoasClicam;
+            contadorCompartilhamentos += pessoasCompartilham;
 
         }
-        int totalViews = (int) Math.round(contadorVisualizacoes);
+        int totalViews = (int) Math.round(contadorViews);
+        int totalCliques = (int) Math.round(contadorCliques);
+        int totalComp = (int) Math.round(contadorCompartilhamentos);
         System.out.println("A quantidade de pessoas que visualizaram o anúncio é: " + totalViews);
+        System.out.println("A quantidade de pessoas que clicaram no anúncio é: " + totalCliques);
+        System.out.println("A quantidade de pessoas que compartilharam o anúncio é: " + totalComp);
 
     }
 
